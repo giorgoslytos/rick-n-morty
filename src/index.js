@@ -7,13 +7,18 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Character from "./components/Character";
+import history from "./utils/history";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <Route path="/">
+      <Router history={history}>
+        <Route path={["/", "/page=:id"]} exact>
           <App />
+        </Route>
+        <Route path="/character/:id" exact>
+          <Character />
         </Route>
       </Router>
     </Provider>

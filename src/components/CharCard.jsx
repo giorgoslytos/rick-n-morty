@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { saveCurrentPage } from "../app/countSlice";
 
 const CharCard = ({ props }) => {
+  const { id } = useParams();
+
+  const handleClick = () => {
+    console.log(id);
+  };
+  useEffect(() => {}, []);
+
   return (
-    <Card>
+    <Card style={{ maxWidth: "300px" }}>
       <Card.Img variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
@@ -29,9 +39,11 @@ const CharCard = ({ props }) => {
             {props.origin.name}
           </Card.Text>
         </div>
-        <Button variant="info" className="mt-3">
-          Go somewhere
-        </Button>
+        <Link onClick={() => handleClick()} to={`/character/${props.id}`}>
+          <Button variant="info" className="mt-3">
+            More Info
+          </Button>
+        </Link>
       </Card.Body>
     </Card>
   );
