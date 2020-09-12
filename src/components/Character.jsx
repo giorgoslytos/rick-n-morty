@@ -17,10 +17,6 @@ const Character = () => {
     fetchCharacter();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(Number(character));
-  // }, [character]);
-
   return (
     <div className="container">
       <div>

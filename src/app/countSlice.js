@@ -4,7 +4,7 @@ export const counterSlice = createSlice({
   name: "count",
   initialState: {
     page: 1,
-    savedPage: 1,
+    pagesNum: 1,
   },
   reducers: {
     nextPage: (state) => {
@@ -16,15 +16,21 @@ export const counterSlice = createSlice({
     setPage: (state, action) => {
       state.page = action.payload;
     },
+    setPagesNum: (state, action) => {
+      state.pagesNum = action.payload;
+    },
   },
 });
 
-export const { prevPage, nextPage, setPage } = counterSlice.actions;
+export const {
+  prevPage,
+  nextPage,
+  setPage,
+  setPagesNum,
+} = counterSlice.actions;
 
-// export const incrementAsync = (amount) => (dispatch) => {
-//   setTimeout(() => {
-//     dispatch(incrementByAmount(amount));
-//   }, 1000);
-// };
+export const setTotalPages = (amount) => (dispatch) => {
+  dispatch(setPagesNum(amount));
+};
 
 export default counterSlice.reducer;
