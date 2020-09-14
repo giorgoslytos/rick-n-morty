@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CharCard from "./CharCard";
-import { getCharacter } from "rickmortyapi";
-import { Card, Button } from "react-bootstrap";
+import { getCharacter, getEpisode } from "rickmortyapi";
+import { Card, Button, Accordion } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 const Character = () => {
   const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
   const { id } = useParams();
   const page = useSelector((state) => state.count.page);
   const fetchCharacter = async () => {
     setCharacter(await getCharacter(Number(id)));
   };
+
+  const fetchEpisodes = async () => {
+    const epiArr = [];
+    for (let i = 0; i < character?.episode?.length; i++) {
+      epiArr.push(getEpisode(Number(character?.episode[i]?.slice(40))));
+    }
+    await Promise.all(epiArr).then((epi) => setEpisodes(epi));
+  };
+
+  useEffect(() => {
+    if (character?.episode) fetchEpisodes();
+  }, [character]);
 
   useEffect(() => {
     fetchCharacter();
@@ -68,61 +81,46 @@ const Character = () => {
                     "unknown"
                   )}
                 </p>
-                <Link to={`/page=${page}`}>
-                  <Button variant="info" className="mt-3">
-                    Go home
-                  </Button>
-                </Link>
               </div>
             </div>
-            {/* <Card
-              style={{
-                width: "400px",
-                margin: "auto",
-                flexDirection: "row",
-              }}
-            >
-              <Card.Img variant="top" src={character.image} />
-              <Card.Body
-                style={{
-                  padding: "0!important",
-                  margin: "0 0 0 2rem",
-                }}
-              >
-                <div className="text-left">
-                  <Card.Text>
-                    <b>Gender: </b>
-                    {character.gender}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Species: </b>
-                    {character.species}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Status: </b>
-                    {character.status}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Location: </b>
-                    {character.location.name}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Origin: </b>
-                    {character.origin.name}
-                  </Card.Text>
-                </div>
-                <Link to={`/page=${page}`}>
-                  <Button variant="info" className="mt-3">
-                    Go back
-                  </Button>
-                </Link>
-              </Card.Body>
-            </Card> */}
           </div>
         ) : (
           <></>
         )}
       </div>
+      <Accordion defaultActiveKey="0" className="mt-3">
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+              Episodes
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>
+              {episodes?.map((epi) => (
+                <div key={epi.id} className="mb-4 mt-2">
+                  <b>Episode: {"    "}</b>
+                  {epi.episode}
+
+                  <div className="mx-4">
+                    <b>Name: </b>
+                    {epi.name}
+                  </div>
+                  <div className="mx-4">
+                    <b>Air Date: </b>
+                    {epi.air_date}
+                  </div>
+                </div>
+              ))}
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+      <Link to={`/page=${page}`}>
+        <Button variant="info" className="mt-3 mb-5">
+          Go home
+        </Button>
+      </Link>
     </div>
   );
 };

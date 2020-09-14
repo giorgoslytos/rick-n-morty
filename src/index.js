@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Character from "./components/Character";
 import Location from "./components/Location";
+import Episode from "./components/Episode";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,9 @@ ReactDOM.render(
         </Route>
         <Route path="/location/:id" exact>
           <Location />
+        </Route>
+        <Route path="/episode/:id" exact>
+          <Episode />
         </Route>
       </Router>
     </Provider>
