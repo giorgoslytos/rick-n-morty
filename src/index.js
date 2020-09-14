@@ -8,17 +8,20 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Character from "./components/Character";
-import history from "./utils/history";
+import Location from "./components/Location";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router history={history}>
+      <Router>
         <Route path={["/", "/page=:id"]} exact>
           <App />
         </Route>
         <Route path="/character/:id" exact>
           <Character />
+        </Route>
+        <Route path="/location/:id" exact>
+          <Location />
         </Route>
       </Router>
     </Provider>

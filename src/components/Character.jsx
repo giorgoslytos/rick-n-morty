@@ -46,17 +46,31 @@ const Character = () => {
                   <b>Status: </b>
                   {character.status}
                 </p>
+                <b>Location: </b>
                 <p>
-                  <b>Location: </b>
-                  {character.location.name}
+                  {character.location.name !== "unknown" ? (
+                    <Link
+                      to={"/location/" + character?.location?.url?.slice(41)}
+                    >
+                      {character.location.name}
+                    </Link>
+                  ) : (
+                    "unknown"
+                  )}
                 </p>
                 <p>
                   <b>Origin: </b>
-                  {character.origin.name}
+                  {character.origin.name !== "unknown" ? (
+                    <Link to={"/location/" + character?.origin?.url?.slice(41)}>
+                      {character.origin.name}
+                    </Link>
+                  ) : (
+                    "unknown"
+                  )}
                 </p>
                 <Link to={`/page=${page}`}>
                   <Button variant="info" className="mt-3">
-                    Go back
+                    Go home
                   </Button>
                 </Link>
               </div>
