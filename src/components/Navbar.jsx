@@ -9,11 +9,6 @@ const Navbar = () => {
   const page = useSelector((state) => state.count.page);
   const pagesNum = useSelector((state) => state.count.pagesNum);
   const dispatch = useDispatch();
-  const [characters, setCharacters] = useState([]);
-
-  const fetchData = async () => {
-    setCharacters(await getCharacter());
-  };
 
   const handleNav = (dir) => {
     switch (dir) {
@@ -25,10 +20,6 @@ const Navbar = () => {
         break;
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, [page]);
 
   return (
     <nav
