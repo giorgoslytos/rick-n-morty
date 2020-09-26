@@ -6,7 +6,7 @@ import CharCard from "./CharCard";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 
-export function Counter() {
+export function Home() {
   const page = useSelector((state) => state.count.page);
   const pagesNum = useSelector((state) => state.count.pagesNum);
   const dispatch = useDispatch();
@@ -50,6 +50,7 @@ export function Counter() {
               </div>
             ))}
           </div>
+          <Navbar />
         </>
       )}
     </div>

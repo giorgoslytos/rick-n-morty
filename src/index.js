@@ -6,9 +6,10 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Character from "./components/Character";
 import Location from "./components/Location";
+import Locations from "./components/Locations";
 import Episode from "./components/Episode";
 
 ReactDOM.render(
@@ -20,6 +21,9 @@ ReactDOM.render(
         </Route>
         <Route path="/character/:id" exact>
           <Character />
+        </Route>
+        <Route path="/locations" exact>
+          <Locations />
         </Route>
         <Route path="/location/:id" exact>
           <Location />

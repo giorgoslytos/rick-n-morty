@@ -99,17 +99,19 @@ const Character = () => {
             <Card.Body>
               {episodes?.map((epi) => (
                 <div key={epi.id} className="mb-4 mt-2">
-                  <b>Episode: {"    "}</b>
-                  {epi.episode}
+                  <Link to={`/episode/${epi.id}`}>
+                    <b>Episode: {"    "}</b>
+                    {epi.episode}
 
-                  <div className="mx-4">
-                    <b>Name: </b>
-                    {epi.name}
-                  </div>
-                  <div className="mx-4">
-                    <b>Air Date: </b>
-                    {epi.air_date}
-                  </div>
+                    <div className="mx-4">
+                      <b>Name: </b>
+                      {epi.name}
+                    </div>
+                    <div className="mx-4">
+                      <b>Air Date: </b>
+                      {epi.air_date}
+                    </div>
+                  </Link>
                 </div>
               ))}
             </Card.Body>
