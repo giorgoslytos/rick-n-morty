@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nextPage, prevPage } from "../app/countSlice";
+import { nextPage, prevPage, setPage } from "../app/countSlice";
 import { getCharacter } from "rickmortyapi";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -17,6 +17,12 @@ const Navbar = ({ pos }) => {
         break;
       case "prev":
         if (page > 1) dispatch(prevPage());
+        break;
+      case "first":
+        if (page !== 1) dispatch(setPage(1));
+        break;
+      case "last":
+        if (page !== pagesNum) dispatch(setPage(pagesNum));
         break;
     }
   };
@@ -49,22 +55,39 @@ const Navbar = ({ pos }) => {
           page > 1 ? "between" : "end"
         } my-5`}
       >
-        <Link
-          to={`page=${page === 1 ? 1 : page - 1}`}
+        <div
           style={page <= 1 ? { display: "none" } : { display: "inline-block" }}
-          onClick={() => handleNav("prev")}
         >
-          <Button variant="outline-success">Previous</Button>
-        </Link>
-        <Link
-          to={`page=${page + 1}`}
+          <Link
+            to={`page=1`}
+            className="mr-2"
+            onClick={() => handleNav("first")}
+          >
+            <Button variant="outline-success">{"<<"}</Button>
+          </Link>
+          <Link
+            to={`page=${page === 1 ? 1 : page - 1}`}
+            onClick={() => handleNav("prev")}
+          >
+            <Button variant="outline-success">Previous</Button>
+          </Link>
+        </div>
+        <div
           style={
             page >= pagesNum ? { display: "none" } : { display: "inline-block" }
           }
-          onClick={() => handleNav("next")}
         >
-          <Button variant="outline-success">Next</Button>
-        </Link>
+          <Link to={`page=${page + 1}`} onClick={() => handleNav("next")}>
+            <Button variant="outline-success">Next</Button>
+          </Link>
+          <Link
+            to={`page=${pagesNum}`}
+            className="ml-2"
+            onClick={() => handleNav("last")}
+          >
+            <Button variant="outline-success">{">>"}</Button>
+          </Link>
+        </div>
       </nav>
     </div>
   );
