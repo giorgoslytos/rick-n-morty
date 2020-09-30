@@ -2,29 +2,10 @@ import React, { useEffect, useState } from "react";
 import { ListGroup, Accordion, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getEpisode } from "rickmortyapi";
+import useData from "../utils/useData";
 
 const Episodes = () => {
-  const [episodes, setEpisodes] = useState([]);
-  const [episodePages, setEpisodePages] = useState(0);
-  const [episodeCount, setEpisodeCount] = useState(0);
-
-  const fetchEpisodes = async () => {
-    const firstEpi = await getEpisode();
-    console.log(firstEpi);
-    setEpisodeCount(firstEpi.info.count);
-    setEpisodePages(firstEpi.info.pages);
-    let epis = firstEpi.results;
-    for (let i = 2; i <= firstEpi.info.pages; i++) {
-      console.log(epis);
-      epis = [...epis, ...(await getEpisode({ page: i })).results];
-      console.log(epis);
-    }
-    setEpisodes(epis);
-  };
-
-  useEffect(() => {
-    fetchEpisodes();
-  }, []);
+  const [episodes, episodeCount] = useData("episodes");
 
   return (
     <div className="container mb-5">

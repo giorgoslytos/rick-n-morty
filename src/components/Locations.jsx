@@ -2,27 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Accordion, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getLocation } from "rickmortyapi";
+import useData from "../utils/useData";
 
 const Locations = () => {
-  const [locations, setLocations] = useState();
-
-  const fetchLocations = async () => {
-    setLocations(await getLocation());
-  };
-
-  useEffect(() => {
-    fetchLocations();
-  }, []);
-
+  const [data, dataCount] = useData("locations");
   return (
     <div className="container mb-5">
       <div>
         <div className="display-3 text-center m-5">Locations</div>
         <div className="h4 mb-4">
-          <b>{locations?.info?.count}</b> locations were found
+          <b>{dataCount}</b> locations were found
         </div>
       </div>
-      {locations?.results.map((location) => (
+      {data?.map((location) => (
         <Accordion defaultActiveKey="0" className="m-0" key={location.id}>
           <Card>
             <Card.Header className="bg-info p-0">
