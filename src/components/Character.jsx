@@ -88,26 +88,32 @@ const Character = () => {
           <></>
         )}
       </div>
-      <Accordion defaultActiveKey="0" className="mt-3">
+      <Accordion defaultActiveKey="0" className="mt-3 p-0">
         <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+          <Card.Header className="p-0 bg-info">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="1"
+              className="p-2 px-3 w-100 text-left text-white"
+            >
               Episodes
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
             <Card.Body>
               {episodes?.map((epi) => (
-                <div key={epi.id} className="mb-4 mt-2">
+                <div key={epi.id} className="my-2">
                   <Link to={`/episode/${epi.id}`}>
-                    <b>Episode: {"    "}</b>
-                    {epi.episode}
-
-                    <div className="mx-4">
+                    <div className="mx-4 text-dark">
+                      <b>Episode: {"    "}</b>
+                      {epi.episode}
+                    </div>
+                    <div className="mx-4 text-dark">
                       <b>Name: </b>
                       {epi.name}
                     </div>
-                    <div className="mx-4">
+                    <div className="mx-4 text-dark">
                       <b>Air Date: </b>
                       {epi.air_date}
                     </div>

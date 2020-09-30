@@ -41,8 +41,13 @@ const Episode = () => {
       </ListGroup>
       <Accordion defaultActiveKey="0">
         <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+          <Card.Header className="bg-info p-0">
+            <Accordion.Toggle
+              as={Button}
+              variant="link"
+              eventKey="1"
+              className="text-white p-3 w-100 text-left"
+            >
               Characters
             </Accordion.Toggle>
           </Card.Header>
@@ -56,13 +61,13 @@ const Episode = () => {
                   >
                     <Card>
                       <Link to={`/character/${res.id}`}>
-                        <Card.Header>{res.name}</Card.Header>
                         <Card.Img
                           variant="bottom"
                           src={res.image}
                           alt=""
                           className="card-img-top"
                         />
+                        <Card.Header>{res.name}</Card.Header>
                       </Link>
                     </Card>
                   </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ListGroup, Accordion, Card, Button } from "react-bootstrap";
+import { Accordion, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getLocation } from "rickmortyapi";
 
@@ -14,28 +14,23 @@ const Locations = () => {
     fetchLocations();
   }, []);
 
-  useEffect(() => {
-    console.log(locations);
-  }, [locations]);
-
   return (
-    <div className="container">
+    <div className="container mb-5">
       <div>
         <div className="display-3 text-center m-5">Locations</div>
-        <div className="h4 mb-4">{`${locations?.info.count} locations were found`}</div>
-        {/* {locations?.results?.map((location) => (
-        <>{location}</>
-      ))} */}
+        <div className="h4 mb-4">
+          <b>{locations?.info?.count}</b> locations were found
+        </div>
       </div>
       {locations?.results.map((location) => (
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" className="m-0" key={location.id}>
           <Card>
-            <Card.Header className="bg-info">
+            <Card.Header className="bg-info p-0">
               <Accordion.Toggle
                 as={Button}
                 variant="link"
                 eventKey="1"
-                className="text-white w-100 text-left p-0"
+                className="text-light w-100 text-left p-2 px-3"
               >
                 {location.name}
               </Accordion.Toggle>
@@ -43,15 +38,14 @@ const Locations = () => {
             <Accordion.Collapse eventKey="1">
               <Card.Body>
                 <div className="row">
-                  <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
-                    {/* <Card.Header>{`Type: ${location.type}`}</Card.Header> */}
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3 bg-white">
                     <div>
                       <b>Type: </b>
                       {location.type}
                     </div>
                     <div>
                       <b>Dimension: </b>
-                      {location.type}
+                      {location.dimension}
                     </div>
                     <div className="mt-3">
                       <Link to={`/location/${location.id}`}>
@@ -65,6 +59,11 @@ const Locations = () => {
           </Card>
         </Accordion>
       ))}
+      <Link to={`/`}>
+        <Button variant="outline-primary" className="my-5">
+          Go home
+        </Button>
+      </Link>
     </div>
   );
 };

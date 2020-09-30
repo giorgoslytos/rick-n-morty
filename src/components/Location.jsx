@@ -42,12 +42,12 @@ const Location = () => {
       </ListGroup>
       <Accordion defaultActiveKey="0">
         <Card>
-          <Card.Header className="bg-info">
+          <Card.Header className="bg-info p-0">
             <Accordion.Toggle
               as={Button}
               variant="link"
               eventKey="1"
-              className="text-white p-0"
+              className="text-white p-3 w-100 text-left"
             >
               Residents
             </Accordion.Toggle>
@@ -59,13 +59,13 @@ const Location = () => {
                   <div className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3">
                     <Card>
                       <Link to={`/character/${res.id}`}>
-                        <Card.Header>{res.name}</Card.Header>
                         <Card.Img
                           variant="bottom"
                           src={res.image}
                           alt=""
                           className="card-img-top"
                         />
+                        <Card.Header>{res.name}</Card.Header>
                       </Link>
                     </Card>
                   </div>

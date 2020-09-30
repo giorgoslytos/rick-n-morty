@@ -19,7 +19,6 @@ export function Home() {
 
   const fetchMaxPages = async () => {
     dispatch(setTotalPages((await getCharacter())?.info?.pages));
-    // setMaxPage((await getCharacter())?.info?.pages);
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export function Home() {
         <div>Not a valid query string</div>
       ) : (
         <>
-          <Navbar />
+          <Navbar pos="top" />
           <div className="row" style={{ textAlign: "-webkit-center" }}>
             {characters?.results?.map((res) => (
               <div
@@ -50,7 +49,7 @@ export function Home() {
               </div>
             ))}
           </div>
-          <Navbar />
+          <Navbar pos="bottom" />
         </>
       )}
     </div>

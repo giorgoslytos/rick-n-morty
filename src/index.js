@@ -11,6 +11,7 @@ import Character from "./components/Character";
 import Location from "./components/Location";
 import Locations from "./components/Locations";
 import Episode from "./components/Episode";
+import Episodes from "./components/Episodes";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,9 @@ ReactDOM.render(
         </Route>
         <Route path="/location/:id" exact>
           <Location />
+        </Route>
+        <Route path="/episodes" exact>
+          <Episodes />
         </Route>
         <Route path="/episode/:id" exact>
           <Episode />
